@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/custom_textfields.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 enum Auth {
@@ -9,7 +10,7 @@ enum Auth {
 }
 
 class AuthScreen extends StatefulWidget {
-  static const String routeName = 'auth_screen';
+  static const String routeName = '/auth_screen';
   const AuthScreen({super.key});
 
   @override
@@ -20,6 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
@@ -30,6 +32,14 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+        context: context,
+        name: _nameController.text,
+        password: _passwordController.text,
+        email: _emailController.text);
   }
 
   @override
@@ -96,14 +106,21 @@ class _AuthScreenState extends State<AuthScreen> {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        CustomButton(onPressed: () {}, text: 'Sign Up')
+                        CustomButton(
+                          onPressed: () {
+                            if (_signUpFormKey.currentState!.validate()) {
+                            
+                              signUpUser();
+                            }
+                          },
+                          text: 'Sign Up',
+                        ),
                       ],
                     ),
                   ),
                 ),
-             
               ListTile(
-                 tileColor: _auth == Auth.signin
+                tileColor: _auth == Auth.signin
                     ? GlobalVariables.backgroundColor
                     : GlobalVariables.greyBackgroundColor,
                 title: const Text(
@@ -120,7 +137,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       });
                     }),
               ),
-               if (_auth == Auth.signin)
+              if (_auth == Auth.signin)
                 Container(
                   color: GlobalVariables.backgroundColor,
                   padding: const EdgeInsets.all(8.0),

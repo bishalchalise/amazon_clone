@@ -1,7 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_import
 
 import 'dart:convert';
 
+import 'package:amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
@@ -80,8 +81,9 @@ class AuthService {
             Provider.of<UserProvider>(context, listen: false).setUser(res.body);
             await prefs.setString(
                 'x-auth-token', jsonDecode(res.body)['token']);
+
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
+                context, BottomBar.routeName, (route) => false);
 
             showSnackBar(
                 context, "Account Created! Login with the same credentials!");
@@ -101,20 +103,21 @@ class AuthService {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
+     
 
       if (token == null) {
-        prefs.setString('x-atuh-token', '');
+        prefs.setString('x-auth-token', '');
       }
 
       var tokenRes = await http.post(
         Uri.parse('$uri/tokenIsValid'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-atuh-token': token!,
+          'x-auth-token': token!,
         },
       );
       var response = jsonDecode(tokenRes.body);
-      if (response = true) {
+      if (response == true) {
         //get user data
         http.Response userRes = await http.get(
           Uri.parse(
@@ -122,27 +125,14 @@ class AuthService {
           ),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
-            'x-atuh-token': token,
+            'x-auth-token': token,
           },
         );
 
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
       }
-      // httpErrorHandle(
-      //     response: res,
-      //     context: context,
-      //     onSuccess: () async {
-      //       SharedPreferences prefs = await SharedPreferences.getInstance();
-      //       Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-      //       await prefs.setString(
-      //           'x-auth-token', jsonDecode(res.body)['token']);
-      //       Navigator.pushNamedAndRemoveUntil(
-      //           context, HomeScreen.routeName, (route) => false);
-
-      //       showSnackBar(
-      //           context, "Account Created! Login with the same credentials!");
-      //     });
+   
     } catch (e) {
       showSnackBar(
         context,

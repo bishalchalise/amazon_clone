@@ -31,6 +31,17 @@ class _PostScreenState extends State<PostScreen> {
     Navigator.pushNamed(context, AddProductScreen.routeName);
   }
 
+  void deleteProduct(Product product, int index) {
+    adminServices.deleteProducts(
+      context: context,
+      product: product,
+      onSuccess: () {
+        products!.removeAt(index);
+        setState(() {});
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return products == null
@@ -53,13 +64,19 @@ class _PostScreenState extends State<PostScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                            child: Text(
-                          productData.name,
-                          overflow: TextOverflow.ellipsis, maxLines: 2,
+                          child: Text(
+                            productData.name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
                         ),
-                        ),
-                        IconButton(onPressed: (){}, icon: const Icon(Icons.delete_outline),)
-
+                        Text(productData.price),
+                        IconButton(
+                          onPressed: () {
+                            deleteProduct(productData, index);
+                          },
+                          icon: const Icon(Icons.delete_outline),
+                        )
                       ],
                     )
                   ],

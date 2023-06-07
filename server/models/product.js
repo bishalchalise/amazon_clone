@@ -12,7 +12,7 @@ const productSchema = mongoose.Schema({
     trim: true,
   },
   quantity: {
-    type: Number,
+    type: String,
     required: true,
   },
   images: [
@@ -26,7 +26,7 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   price: {
-    type: Number,
+    type: String,
     required: true,
   },
   //ratings

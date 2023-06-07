@@ -51,6 +51,7 @@ class _MyAppState extends State<MyApp> {
               ? const BottomBar()
               : const AdminScreen()
           : const AuthScreen(),
+    //  home: const AuthScreen(),
     );
   }
 }

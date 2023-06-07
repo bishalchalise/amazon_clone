@@ -11,26 +11,31 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
-    int _page = 0;
+  int _page = 0;
   double bottomNavBarWidth = 42.0;
   double bottomBarBorderWidth = 5.0;
 
-void updatePage(int page) {
+  void updatePage(int page) {
     setState(() {
       _page = page;
     });
   }
-    List<Widget> pages = [
-   const PostScreen(),
-    const Center(child: Text('analytics'),),
-    const Center(child: Text('order'),)
+
+  List<Widget> pages = [
+    const PostScreen(),
+    const Center(
+      child: Text('analytics'),
+    ),
+    const Center(
+      child: Text('order'),
+    )
   ];
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-
-       appBar: PreferredSize(
+   
+    return Scaffold(
+      appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
           flexibleSpace: Container(
@@ -49,16 +54,17 @@ void updatePage(int page) {
                   height: 45,
                 ),
               ),
-           const Text('Admin', style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold),)
+              const Text(
+                'Admin',
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              )
             ],
           ),
         ),
-        
       ),
-          body: pages[_page],
-           bottomNavigationBar: BottomNavigationBar(
+      body: pages[_page],
+      bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
@@ -104,7 +110,7 @@ void updatePage(int page) {
             label: '',
           ),
           //orders
-             BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Container(
               width: bottomNavBarWidth,
               decoration: BoxDecoration(
@@ -123,7 +129,6 @@ void updatePage(int page) {
             ),
             label: '',
           ),
-    
         ],
       ),
     );

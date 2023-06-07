@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:amazon_clone/constants/global_variables.dart';
@@ -10,7 +12,7 @@ import 'package:http/http.dart' as http;
 import '../../../constants/error_handling.dart';
 import '../../../constants/utils.dart';
 
-class HomeServies {
+class HomeServices {
   Future<List<Product>> fetchCategoryProducts({
 required BuildContext context, 
 required String category,
@@ -20,7 +22,7 @@ required String category,
     List<Product> productList = [];
     try {
       http.Response res = await http.get(
-        Uri.parse('$uri/admin/get-products'),
+        Uri.parse('$uri/api/products?category=$category'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,

@@ -19,17 +19,13 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const BottomBar());
 
-
-
     case SearchScreen.routeName:
       var searchQuery = routeSettings.arguments as String;
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) =>  SearchScreen(
-          searchQuery: searchQuery,
-
-          ));
-
-
+          settings: routeSettings,
+          builder: (_) => SearchScreen(
+                searchQuery: searchQuery,
+              ));
 
     case CategoryDealsScreen.routeName:
       var category = routeSettings.arguments as String;

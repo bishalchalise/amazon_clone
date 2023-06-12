@@ -3,6 +3,7 @@ import 'package:amazon_clone/features/home/widgets/address_box.dart';
 import 'package:amazon_clone/features/home/widgets/carousel_image.dart';
 import 'package:amazon_clone/features/home/widgets/deal_of_the_day.dart';
 import 'package:amazon_clone/features/home/widgets/top_categories.dart';
+import 'package:amazon_clone/features/search/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,10 +15,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
-  
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
@@ -38,9 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
+                      onFieldSubmitted: navigateToSearchScreen,
                       decoration: InputDecoration(
                         prefixIcon: InkWell(
-                          onTap: () {},
+                          onTap: (){},
                           child: const Padding(
                             padding: EdgeInsets.only(left: 6),
                             child: Icon(
@@ -94,17 +98,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body:  const SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
-              AddressBox(),
-              SizedBox(height: 10,), 
-              TopCategoreis(),
-                      SizedBox(height: 10,), 
-                      CarouselImage(),
-                            SizedBox(height: 10,), 
-                            DealOfDay(),
-      
+            AddressBox(),
+            SizedBox(
+              height: 10,
+            ),
+            TopCategoreis(),
+            SizedBox(
+              height: 10,
+            ),
+            CarouselImage(),
+            SizedBox(
+              height: 10,
+            ),
+            DealOfDay(),
           ],
         ),
       ),

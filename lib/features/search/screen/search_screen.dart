@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/home/widgets/address_box.dart';
+import 'package:amazon_clone/features/product_details/screen/product_details.dart';
 import 'package:amazon_clone/features/search/services/serch_services.dart';
 import 'package:amazon_clone/features/search/widgets/searched_products.dart';
 import 'package:amazon_clone/models/product.dart';
@@ -129,8 +130,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: ListView.builder(
                     itemCount: products!.length,
                     itemBuilder: (context, index) {
-                      return SearchedProducts(
-                        searchProducts: products![index],
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, ProductDetailsScreen.routeName, arguments: products![index]);
+                        },
+                        child: SearchedProducts(
+                          searchProducts: products![index],
+                        ),
                       );
                     },
                   ),

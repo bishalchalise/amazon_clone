@@ -29,7 +29,7 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     fetchCategoryProducts();
   }

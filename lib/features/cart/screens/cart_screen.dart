@@ -1,7 +1,11 @@
+import 'package:amazon_clone/common/widgets/custom_button.dart';
+import 'package:amazon_clone/features/cart/widget/cart_product.dart';
 import 'package:amazon_clone/features/cart/widget/cart_subtotal.dart';
 import 'package:amazon_clone/features/home/widgets/address_box.dart';
 import 'package:amazon_clone/features/search/screen/search_screen.dart';
+import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/global_variables.dart';
 
@@ -19,6 +23,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserProvider>().user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
@@ -100,7 +105,33 @@ class _CartScreenState extends State<CartScreen> {
         child: Column(
           children: [
             const AddressBox(),
-            // const CartSubtotal(),
+            const CartSubtotal(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomButton(
+                onPressed: () {},
+                text: 'Proceed to Buy (${user.cart.length} items)',
+                color: Colors.yellow[600],
+              ),
+            ),
+            const SizedBox(
+              height: 15.0,
+            ),
+            Container(
+              color: Colors.black12.withOpacity(0.08),
+              height: 1,
+            ),
+            const SizedBox(
+              height: 5.0,
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+                itemCount: user.cart.length,
+                itemBuilder: (context, index) {
+                  return CartProduct(
+                    index: index,
+                  );
+                })
           ],
         ),
       ),

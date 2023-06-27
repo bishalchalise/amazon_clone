@@ -8,9 +8,9 @@ class CartSubtotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().user;
-    int sum = 0;
+    double sum = 0;
     user.cart
-        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
+        .map((e) => sum += e['quantity'] * e['product']['price'])
         .toList();
     return Container(
       margin: const EdgeInsets.all(
@@ -19,7 +19,7 @@ class CartSubtotal extends StatelessWidget {
       child: Row(
         children: [
           const Text(
-            'Subtotal ',
+            'Subtotal: ',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold

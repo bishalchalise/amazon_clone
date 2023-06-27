@@ -70,7 +70,7 @@ class _PostScreenState extends State<PostScreen> {
                             maxLines: 2,
                           ),
                         ),
-                        Text(productData.price),
+                        Text(productData.price.toString()),
                         IconButton(
                           onPressed: () {
                             deleteProduct(productData, index);

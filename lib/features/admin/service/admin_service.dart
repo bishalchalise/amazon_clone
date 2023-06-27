@@ -19,8 +19,8 @@ class AdminServices {
     required String name,
     required String description,
     required String category,
-    required String price,
-    required String quantity,
+    required double price,
+    required double quantity,
     required List<File> images,
   }) async {
     try {

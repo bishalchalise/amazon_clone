@@ -56,10 +56,10 @@ class HomeServices {
     Product product = Product(
       name: "",
       description: "",
-      quantity: "",
+      quantity: 0,
       images: [],
       category: "",
-      price: "",
+      price: 0,
     );
     try {
       http.Response res = await http.get(

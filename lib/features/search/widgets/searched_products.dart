@@ -8,10 +8,18 @@ class SearchedProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double totalRating = 0;
+    for (int i = 0; i < searchProducts.rating!.length; i++) {
+      totalRating += searchProducts.rating![i].rating;
+    }
+    double avgRating = 0;
+    if (totalRating != 0) {
+      avgRating = totalRating / searchProducts.rating!.length;
+    }
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(
+          margin:  const EdgeInsets.symmetric(
             horizontal: 10,
           ),
           child: Row(
@@ -43,8 +51,8 @@ class SearchedProducts extends StatelessWidget {
                       left: 10,
                       top: 5,
                     ),
-                    child: const Stars(
-                      rating: 4,
+                    child:  Stars(
+                      rating: avgRating,
                     ),
                   ),
                   Container(
@@ -67,7 +75,6 @@ class SearchedProducts extends StatelessWidget {
                     ),
                     child: const Text(
                       "Elligible for FREE Shipping",
-                    
                     ),
                   ),
                   Container(

@@ -6,10 +6,10 @@ import 'package:amazon_clone/models/rating.dart';
 class Product {
   final String name;
   final String description;
-  final String quantity;
+  final double quantity;
   final List<String> images;
   final String category;
-  final String price;
+  final double price;
   final String? id;
   final List<Rating>? rating;
 

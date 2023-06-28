@@ -131,7 +131,7 @@ class _CartScreenState extends State<CartScreen> {
                   return CartProduct(
                     index: index,
                   );
-                })
+                },),
           ],
         ),
       ),

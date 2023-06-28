@@ -73,7 +73,7 @@ class _CartProductState extends State<CartProduct> {
                       top: 5,
                     ),
                     child: Text(
-                      "\$${product.price}",
+                      "\$${product.price} ",
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                       maxLines: 2,

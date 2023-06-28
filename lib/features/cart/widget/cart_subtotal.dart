@@ -10,7 +10,7 @@ class CartSubtotal extends StatelessWidget {
     final user = context.watch<UserProvider>().user;
     double sum = 0;
     user.cart
-        .map((e) => sum += e['quantity'] * e['product']['price'])
+        .map((e) => sum += e['quantity'] * e['product']['price'] )
         .toList();
     return Container(
       margin: const EdgeInsets.all(
@@ -20,13 +20,10 @@ class CartSubtotal extends StatelessWidget {
         children: [
           const Text(
             'Subtotal: ',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold
-            ),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-           Text(
-            '\$$sum ',
+          Text(
+            '\$$sum',
             style: const TextStyle(
               fontSize: 20,
             ),

@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/admin/models/sales.dart';
 import 'package:amazon_clone/models/orders.dart';
 import 'package:amazon_clone/models/product.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
@@ -190,5 +191,61 @@ class AdminServices {
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+  }
+
+  Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Sales> sales = [];
+    double totalEarnings = 0.0;
+    try {
+      http.Response res = await http.get(
+        Uri.parse('$uri/admin/analytics'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          var response = jsonDecode(res.body);
+          totalEarnings = response['totalEarnings'];
+          sales = [
+            Sales(
+              "Mobiles",
+              response['mobileEarnings'],
+            ),
+            Sales(
+              "Essentials",
+              response['essentialsEarnings'],
+            ),
+            Sales(
+              "Appliances",
+              response['appliancesEarnings'],
+            ),
+            Sales(
+              "Books",
+              response['booksEarnings'],
+            ),
+            Sales(
+              "Fashion",
+              response['fashionEarnings'],
+            ),
+            Sales(
+              "Electronics",
+              response['electronicsEarnings'],
+            ),
+          ];
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return {
+      'sales' : sales, 
+      'totalEarnings': totalEarnings ,
+    };
   }
 }

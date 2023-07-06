@@ -88,7 +88,7 @@ class AuthService {
                 context, BottomBar.routeName, (route) => false);
 
             showSnackBar(
-                context, "Account Created! Login with the same credentials!");
+                context, "Signed In");
           });
     } catch (e) {
       showSnackBar(

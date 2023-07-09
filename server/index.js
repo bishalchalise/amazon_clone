@@ -13,7 +13,7 @@ const userRouter = require("./routes/user");
 const PORT = 3000;
 const app = express();
 const DB =
-  "mongodb+srv://*@cluster0.yrpburk.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://*88888@cluster0.yrpburk.mongodb.net/?retryWrites=true&w=majority";
 
 //middleware
 app.use(express.json());
